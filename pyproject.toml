@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netbox-pdu-manager"
+version = "0.1.0"
+description = "Raritan PDU management plugin for NetBox"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["netbox", "netbox-plugin", "pdu", "raritan", "power-management"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Django",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "netbox>=4.5.0,<4.10.0",
+]
+
+[project.optional-dependencies]
+raritan = [
+    "raritan>=1.0.0",  # Phase 2で追加
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/netbox-pdu-manager"
+Repository = "https://github.com/yourusername/netbox-pdu-manager.git"
+"Bug Tracker" = "https://github.com/yourusername/netbox-pdu-manager/issues"
+
+[tool.setuptools.packages.find]
+include = ["netbox_pdu_manager*"]
+exclude = ["tests*"]

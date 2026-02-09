@@ -1,0 +1,139 @@
+{% extends 'generic/object.html' %}
+{% load helpers %}
+
+{% block content %}
+<div class="row mb-3">
+    <!-- Outlet Information -->
+    <div class="col col-md-6">
+        <div class="card">
+            <h5 class="card-header">Outlet Information</h5>
+            <div class="card-body">
+                <table class="table table-hover attr-table">
+                    <tr>
+                        <th scope="row">PDU</th>
+                        <td>
+                            <a href="{{ object.pdu.get_absolute_url }}">
+                                {{ object.pdu }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Outlet Number</th>
+                        <td>{{ object.outlet_number }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ object.name|placeholder }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Label</th>
+                        <td>{{ object.label|placeholder }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Status</th>
+                        <td>
+                            {% badge object.get_status_display bg_color=object.get_status_color %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Phase</th>
+                        <td>{{ object.get_phase_display|placeholder }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Bank Number</th>
+                        <td>{{ object.bank_number|placeholder }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connected Device -->
+    <div class="col col-md-6">
+        <div class="card">
+            <h5 class="card-header">Connected Device</h5>
+            <div class="card-body">
+                <table class="table table-hover attr-table">
+                    <tr>
+                        <th scope="row">Device</th>
+                        <td>
+                            {% if object.connected_device %}
+                                <a href="{{ object.connected_device.get_absolute_url }}">
+                                    {{ object.connected_device }}
+                                </a>
+                            {% else %}
+                                {{ ''|placeholder }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Device Port</th>
+                        <td>{{ object.connected_device_port|placeholder }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Power Measurements -->
+        <div class="card mt-3">
+            <h5 class="card-header">Power Measurements</h5>
+            <div class="card-body">
+                <table class="table table-hover attr-table">
+                    <tr>
+                        <th scope="row">Voltage</th>
+                        <td>
+                            {% if object.last_measured_voltage %}
+                                {{ object.last_measured_voltage }} V
+                            {% else %}
+                                {{ ''|placeholder }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Current</th>
+                        <td>
+                            {% if object.last_measured_current %}
+                                {{ object.last_measured_current }} A
+                            {% else %}
+                                {{ ''|placeholder }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Power</th>
+                        <td>
+                            {% if object.last_measured_power %}
+                                {{ object.last_measured_power }} W
+                            {% else %}
+                                {{ ''|placeholder }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Last Update</th>
+                        <td>{{ object.last_update|placeholder }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Description -->
+{% if object.description %}
+<div class="row mb-3">
+    <div class="col col-md-12">
+        <div class="card">
+            <h5 class="card-header">Description</h5>
+            <div class="card-body">
+                {{ object.description }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Built-in panels -->
+{% include 'inc/panels/custom_fields.html' %}
+{% include 'inc/panels/tags.html' %}
+{% endblock content %}
