@@ -22,9 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 
-dependencies = [
-    "netbox>=4.5.0,<4.10.0",
-]
+dependencies = []
 
 [project.optional-dependencies]
 raritan = [
